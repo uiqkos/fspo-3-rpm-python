@@ -1,0 +1,12 @@
+! 7×9 eater
+! http://conwaylife.com/wiki/7%C3%979_eater
+# name:str=7×9eater rows:int=100 cols:int=100 speed:int=10 cell_size:int=2 width:int=800 height:int=800
+.O...OO
+O.O...O
+OO...O.
+....O..
+OOOOO.O
+O....OO
+.OOO...
+...O.OO
+....O.O
