@@ -73,12 +73,12 @@ def user_friends_and_their_friends(user_id, max_depth=3, depth=1, friends_limit=
     if depth >= max_depth:
         return []
     users = get_scope(user_id, 'friends')[:friends_limit]
-    friends_ids = list(map(lambda user: user['id'], users))
-    return [*[(user_id, friend_id) for friend_id in friends_ids], *reduce(
+    friend_ids = list(map(lambda user: user['id'], users))
+    return [*[(user_id, friend_id) for friend_id in friend_ids], *reduce(
         list.__add__,
         map(lambda friend_id: user_friends_and_their_friends(
             friend_id, max_depth=max_depth, depth=depth + 1
-        ), friends_ids),
+        ), friend_ids),
         list()
     )]
 
