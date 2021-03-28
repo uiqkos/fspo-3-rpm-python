@@ -3,7 +3,7 @@ from time import sleep
 import requests
 
 default_domain = "https://api.vk.com/method"
-default_access_token = '205dc5c33ad656e36d808b901bf8e18f8ebcdf4ac02b8d4f60f9341b94363e2763d364532c9b7080e0d6e'
+default_access_token = 'TOKEN'
 default_user_id = 450835010
 
 
