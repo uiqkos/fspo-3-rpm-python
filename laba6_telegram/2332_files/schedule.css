@@ -1,0 +1,622 @@
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{background-color:#ff9;color:#000;text-decoration:none}mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}input,select{vertical-align:middle}
+
+html{
+	-webkit-tap-highlight-color: transparent;
+	-webkit-text-size-adjust: none;
+	font-size: 14px;
+}
+
+@font-face {
+    font-family: "ALS Schlange sans";
+    src: url("/css/ALS_Schlange_sans_reg.otf");
+}
+
+@font-face {
+	font-family: "ALS Schlange sans bld";
+	src: url("/css/ALS_Schlange_sans_bld.otf");
+}
+
+@font-face {
+	font-family: "ALS Schlange sans light";
+	src: url("/css/ALS_Schlange_sans_light.otf");
+}
+
+
+
+.container{
+	padding: 34px 40px;
+	font-family: "ALS Schlange sans";
+}
+
+
+.container .container-wrapper .users > .title,
+.container .container-wrapper .places > .title,
+.container .container-wrapper .groups > .title,
+.container .container-wrapper .days > .title,
+.container .container-wrapper .year > .title{
+	font-size: 18px;
+	color: #222222;
+	margin-top: 34px;
+}
+
+.container .container-wrapper .year > .title{
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+
+.container .container-wrapper .year{
+	margin-bottom: 34px;
+}
+
+.container .container-wrapper .year select,
+.container .container-wrapper .year button{
+	height: 36px;
+  padding: 0 20px;
+  border-radius: 6px;
+	outline: none;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	margin-right: 10px;
+	font-size: 14px;
+	font-family: "ALS Schlange sans";
+	cursor: pointer;
+}
+
+.container .container-wrapper .groups > .title{
+	margin-top: 0;
+}
+
+.container .container-wrapper .groups .block,
+.container .container-wrapper .users .block,
+.container .container-wrapper .places .block,
+.container .container-wrapper .days .block{
+	display: inline-block;
+	margin-right: 30px;
+	margin-top: 20px;
+}
+
+.container .container-wrapper .users .block{
+	/*display: block;*/
+}
+
+.container .container-wrapper .groups .block .title,
+.container .container-wrapper .users .block .title,
+.container .container-wrapper .places .block .title,
+.container .container-wrapper .days .block .title{
+	font-size: 14px;
+	color: #A7A7A7;
+}
+
+.container .container-wrapper .groups .block:last-child,
+.container .container-wrapper .users .block:last-child,
+.container .container-wrapper .places .block:last-child,
+.container .container-wrapper .days .block:last-child{
+	margin-right: 0;
+}
+
+.container .container-wrapper .groups .block .links ul,
+.container .container-wrapper .users .block .links ul,
+.container .container-wrapper .places .block .links ul,
+.container .container-wrapper .days .block .links ul{
+	list-style: none;
+}
+
+.container .container-wrapper .groups .block .links ul li,
+.container .container-wrapper .users .block .links ul li,
+.container .container-wrapper .places .block .links ul li,
+.container .container-wrapper .days .block .links ul li{
+	display: inline-block;
+	margin-right: 8px;
+	margin-top: 12px;
+}
+
+.container .container-wrapper .groups .block .links ul li:last-child,
+.container .container-wrapper .users .block .links ul li:last-child,
+.container .container-wrapper .places .block .links ul li:last-child,
+.container .container-wrapper .days .block .links ul li:last-child{
+	margin-right: 0;
+}
+
+.container .container-wrapper .users .block .links ul li{
+	margin-right: 30px;
+	height: 40px;
+}
+
+.container .container-wrapper .users .block .links ul li a{
+	color: #3DB5E6;
+	height: 40px;
+	line-height: 40px;
+	margin-bottom: 16px;
+	position: relative;
+	display: inline-block;
+	width: 210px;
+}
+
+.container .container-wrapper .users .block .links ul li a > div.user-name{
+	line-height: 20px;
+	display: inline-block;
+	vertical-align: middle;
+	padding-left: 52px;
+	text-decoration: underline;
+}
+
+.container .container-wrapper .groups .block .links ul li a,
+.container .container-wrapper .places .block .links ul li a,
+.container .container-wrapper .days .block .links ul li a,
+.container .container-wrapper .block .title a{
+	text-decoration: underline;
+	color: #3DB5E6;
+	font-size: 16px;
+	line-height: 20px;
+}
+
+.container .container-wrapper .users .block .links ul li a .user-photo{
+	width: 40px;
+	height: 40px;
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-size: cover;
+	background-position: center;
+	border-radius: 20px;
+	vertical-align: top;
+}
+
+.container .container-wrapper .users .block .links ul li a .user-photo img{
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+}
+
+.container .container-wrapper .nav div{
+	display: inline-block;
+	border-radius: 6px;
+	margin-right: 16px;
+	vertical-align: middle;
+}
+
+.container .container-wrapper .nav{
+	position: relative;
+}
+
+.container .container-wrapper .nav div:last-child{
+	margin-right: 0px;
+}
+
+.container .container-wrapper .nav div a{
+	height: 20px;
+	line-height: 22px;
+	display: inline-block;
+	-webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+    text-decoration: none;
+    color: #222;
+    border-bottom: 1px dashed #222;
+    margin: 0 20px;
+}
+
+.container .container-wrapper .nav .back a{
+	color: #fff;
+	background-color: #3DB5E6;
+	text-decoration: none;
+	height: 36px;
+	line-height: 38px;
+	padding: 0 20px;
+	border-radius: 6px;
+	margin: 0;
+	border-bottom: none;
+}
+
+/*.container .container-wrapper .nav .session a{
+	color: #fff;
+	background-color: #FF8400;
+	text-decoration: none;
+	height: 36px;
+	line-height: 38px;
+	padding: 0 20px;
+	border-radius: 6px;
+	margin: 0;
+	border-bottom: none;
+}*/
+
+.container .container-wrapper .nav .session{
+	float: right;
+}
+
+.container .container-wrapper .nav .session a{
+	margin-top: 8px;
+}
+
+/*.container .container-wrapper .nav .back a:before{
+	content: "￩";
+	position: relative;
+	top: -1px;
+	margin-right: 6px;
+	text-decoration: none;
+
+}*/
+
+.container .container-wrapper .nav div.session.active a{
+	border: 1px dashed #FF8400;
+	color: #FF8400;
+	height: 36px;
+	line-height: 36px;
+	padding: 0 19px;
+	border-radius: 6px;
+	margin: 0;
+}
+
+.container .container-wrapper .nav div.even.active a{
+	border: 1px dashed #1946BA;
+	color: #1946BA;
+	height: 36px;
+	line-height: 36px;
+	padding: 0 19px;
+	border-radius: 6px;
+	margin: 0;
+}
+
+.container .container-wrapper .nav div.odd.active a{
+	border: 1px dashed #EC0B43;
+	color: #EC0B43;
+	height: 36px;
+	line-height: 36px;
+	padding: 0 19px;
+	border-radius: 6px;
+	margin: 0;
+}
+
+.container .container-wrapper .nav div.all.active a{
+	border: 1px dashed #222;
+	color: #222;
+	height: 36px;
+	line-height: 36px;
+	padding: 0 19px;
+	border-radius: 6px;
+	margin: 0;
+}
+
+.container .container-wrapper .nav div:not(.back):not(.active) a:hover{
+	height: 36px;
+	line-height: 36px;
+	border: 1px dashed #222;
+	padding: 0 19px;
+	margin: 0;
+	border-radius: 6px;
+
+}
+
+.container .container-wrapper .nav div.session a:hover{
+	margin-top: 0;
+}
+
+.container .container-wrapper .schedule{
+	text-align: center;
+	font-size: 18px;
+	margin-top: 30px;
+}
+
+.container .container-wrapper .schedule .title{
+	margin-bottom: 20px;
+}
+
+@media screen and  (min-width: 971px) {
+	.desktop-hide{
+		display: none;
+	}
+}
+
+@media screen and  (max-width: 970px) {
+	.mobile-hide{
+		display: none;
+	}
+}
+
+@media screen and  (max-width: 780px) {
+
+	.nav,
+	.container .container-wrapper .groups,
+	.container .container-wrapper .users,
+	.container .container-wrapper .places,
+	.container .container-wrapper .days{
+		padding: 0 10px;
+	}
+	.container{
+		padding: 20px 0px;
+	}
+
+
+	.container .container-wrapper .groups .block, .container .container-wrapper .users .block, .container .container-wrapper .places .block, .container .container-wrapper .days .block{
+		display: block;
+		margin-right: 0;
+	}
+
+	.container .container-wrapper .nav .session{
+		right: 10px;
+	}
+}
+
+@media screen and  (max-width: 760px) {
+
+	.container .container-wrapper .nav .back a{
+		padding: 0 4px;
+	}
+
+	.container .container-wrapper .nav div{
+		margin-right: 4px;
+	}
+
+	.container .container-wrapper .nav div a{
+		margin: 0 3px;
+	}
+
+	.container .container-wrapper .nav div.all.active a,
+	.container .container-wrapper .nav div.odd.active a,
+	.container .container-wrapper .nav div.even.active a,
+	.container .container-wrapper .nav div.session.active a{
+		padding: 0 6px;
+	}
+
+	.container .container-wrapper .nav div:not(.back):not(.active) a:hover{
+		padding: 0 2px !important;
+	}
+}
+
+@media screen and  (max-width: 400px) {
+/*	.container .container-wrapper .nav .session{
+		float: none;
+		display: block;
+		margin-top: 10px;
+	}*/
+}
+
+
+.weekday-div{
+	text-align: center;
+}
+
+.weekday-p{
+	margin-bottom: 10px;
+	display: block;
+	color: #bbb;
+	text-align: left;
+	/*border: 1px solid #bbb;*/
+	font-size: 14px;
+	border-radius: 6px;
+	outline: none;
+}
+
+.schedule-row-table{
+	text-align: center;
+}
+
+.weekday-table tbody tr:not(:first-child) td{
+	border-top: 1px solid #F1F1F1;
+}
+
+.weekday-table tbody tr td:not(:first-child) {
+	border-left: 1px solid #F1F1F1;
+}
+
+.lesson_td{
+	text-align: left;
+	padding-left: 4px;
+	padding-right: 4px;
+		vertical-align: middle;
+}
+
+.period_td,
+.place_td{
+	width: 40px;
+	text-align: center;
+		vertical-align: middle;
+}
+
+.weekday-table tbody tr td:last-child{
+	width: 40px;
+	text-align: center;
+
+}
+
+.weekday-table{
+	width: 100%;
+	margin-bottom: 4px;
+
+}
+
+.weekday-div{
+	width: 278px;
+	display: inline-block;
+	/*background-color: #f9f9f9;*/
+	border: 1px solid #EEEEEE;
+	padding: 10px;
+	border-radius: 4px;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	vertical-align: top;
+	font-size: 14px;
+	line-height: 20px;
+
+}
+
+.schedule-row{
+	margin: 0 !important;
+	text-align: center;
+}
+
+.schedule-row-table{
+	max-width: 970px;
+	display: inline-block;
+}
+
+.schedule-row .page-header{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.nothing{
+	text-align: left;
+}
+
+.information{
+	text-align: center;
+}
+
+.information > div{
+	/*width: 300px;*/
+	display: inline-block;
+	text-align: center;
+	margin-top: 20px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.information > div > div{
+	display: inline-block;
+	vertical-align: top;
+	text-align: left;
+}
+
+.activePeriod td:first-child div{
+	position: relative;
+	color: #94D600;
+	border-radius: 2px;
+}
+
+.activeWeekday{
+	border-color: #94D600;
+}
+
+.activeWeekday .weekday-p{
+	color: #94D600;
+}
+
+.week-number{
+	position: absolute;
+	right: 20px;
+	height: 44px;
+	line-height: 44px;
+	top: 20px;
+	text-align: center;
+	padding: 0 8px;
+	border-radius: 4px;
+}
+
+.even-week{
+	color: #1946BA;
+}
+
+.odd-week{
+	color: #EC0B43;
+}
+
+.alsbold{
+	font-family: "ALS Schlange sans bld" !important;
+}
+
+.information{
+	margin-top: 20px;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.footer h6{
+	margin-top: 40px;
+	font-size: 12px;
+	font-weight: normal;
+	text-align: center;
+}
+
+.segryslesson{
+background-color: #F1F1F1;
+}
+
+@media screen and (max-width: 414px){
+	.page-header{
+		margin: 10px 0 14px 0;
+	}
+
+	input[type=text]{
+		margin-bottom: 10px;
+	}
+
+	.container .row{
+		margin: 10px;
+	}
+
+	span.label{
+		margin: 6px 5px;
+	}
+
+	.week-number{
+		top: 10px;
+		right: 10px;
+	}
+}
+
+
+
+@media screen and (max-width: 586px){
+	.information > div{
+		display: block;
+	}
+
+	.information > div > div{
+		width: 280px;
+	}
+}
+
+@media print {
+	.nav,
+	.footer{
+		display: none;
+	}
+
+	.container{
+		padding: 0;
+	}
+
+	.container .container-wrapper .schedule{
+		margin-top: 10px;
+	}
+
+	.weekday-div{
+		height: auto !important;
+		page-break-inside: avoid;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.weekday-p{
+		color:  #444 !important;
+	}
+
+	.weekday-div *{
+		page-break-inside: avoid;
+	}
+
+	.schedule-row-table{
+		position: relative;
+	}
+
+	.weekday-div{
+		border-color: #444 !important;
+	}
+
+	.evenlesson{
+		display: inline-block;
+		border-bottom: 1px solid #1946BA;
+		line-height: 17px;
+		margin-bottom: 2px;
+	}
+
+	.oddlesson{
+		display: inline-block;
+		border-bottom: 1px dashed #EC0B43;
+		line-height: 17px;
+		margin-bottom: 2px;
+	}
+}
