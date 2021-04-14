@@ -15,7 +15,8 @@ def parse_file(file_path):
 access_token = '1647434653:AAGvqxWnSYIlxtMZ19WFWOytw1DcFzBsLrg'
 bot = telebot.TeleBot(access_token)
 
-groups_by_user = {}
+group_by_user = {}
+weekdays = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
 
 
 def schedule(group):
@@ -24,15 +25,19 @@ def schedule(group):
     reply = parse_url(url)
 
     if len(reply) == 0:
-        return []
+        return {}
 
-    return [str(weekday) for weekday in reply]
+    return {weekdays.index(weekday.title) : str(weekday) for weekday in reply}
+
 
 
 @bot.message_handler(content_types=['text'])
 def echo(message):
     if message.text[0] == '/':
         command, *args = message.text.split()
+        if command not in ['/start', '/today', '/week', '/help', '/set']:
+            return bot.send_message(message.chat.id, f'"{message.text}"?? \n Нет такой команды :(')
+
         if command == '/start' or command == '/help':
             return bot.send_message(
                 message.chat.id,
@@ -46,11 +51,11 @@ def echo(message):
 
         if command == '/set':
             if len(args) == 1:
-                groups_by_user[message.chat.id] = args[0]
-                return bot.send_message(message.chat.id, 'Текущая группа: ' + groups_by_user[message.chat.id])
+                group_by_user[message.chat.id] = args[0]
+                return bot.send_message(message.chat.id, 'Текущая группа: ' + group_by_user[message.chat.id])
             return bot.send_message(message.chat.id, 'Укажите номер группы')
 
-        if groups_by_user[message.chat.id] is None:
+        if group_by_user.setdefault(message.chat.id, None) is None and len(args) == 0:
             return bot.send_message(
                 message.chat.id,
                 'Группа не установлена \n '
@@ -58,7 +63,7 @@ def echo(message):
             )
 
         week_schedule = \
-            schedule(groups_by_user[message.chat.id]) \
+            schedule(group_by_user[message.chat.id]) \
             if len(args) == 0 \
             else schedule(args[0])
 
@@ -66,14 +71,17 @@ def echo(message):
             return bot.send_message(message.chat.id, 'Нет такой группы :(')
 
         if command == '/today':
+            if datetime.datetime.today().weekday() not in week_schedule.keys():
+                return bot.send_message(message.chat.id, 'Занятий нет')
+
             return bot.send_message(
                 message.chat.id,
-                str(week_schedule[datetime.datetime.today().weekday()]),
+                week_schedule[datetime.datetime.today().weekday()],
                 parse_mode='HTML'
             )
 
         if command == '/week':
-            return bot.send_message(message.chat.id, '\n'.join(week_schedule), parse_mode='HTML')
+            return bot.send_message(message.chat.id, '\n'.join(week_schedule.values()), parse_mode='HTML')
 
-        return bot.send_message(message.chat.id, f'"{message.text}"?? \n Нет такой команды :(')
+        return bot.send_message(message.chat.id, f'Внутренняя ошибка')
 

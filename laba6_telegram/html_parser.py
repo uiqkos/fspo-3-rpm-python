@@ -4,13 +4,11 @@ from bs4 import BeautifulSoup
 
 
 @dataclass
-class WeekDay:
+class Day:
     title: str
     lessons: list
 
     def __str__(self):
-        # return f'{self.title}\n' \
-        #        + '\n'.join([str(lesson) for lesson in self.lessons])
         return f"<b>{self.title}</b>\n" + \
                 '\n'.join([str(lesson) for lesson in self.lessons])
 
@@ -51,9 +49,9 @@ def parse_lesson(soup: BeautifulSoup) -> Lesson:
     )
 
 
-def parse_weekday(soup: BeautifulSoup) -> WeekDay:
-    return WeekDay(
-        title=soup.find('th', attrs={'class': 'day'}).text,
+def parse_day(soup: BeautifulSoup) -> Day:
+    return Day(
+        title=soup.find('th', attrs={'class': 'day'}).text.strip(),
         lessons=list(map(
             parse_lesson,
             filter(
@@ -67,5 +65,5 @@ def parse_weekday(soup: BeautifulSoup) -> WeekDay:
 def parse(contents):
     soup = BeautifulSoup(contents, 'lxml')
 
-    return list(map(parse_weekday, soup.findAll('table', attrs={'class': 'rasp_tabl'})[1:]))
+    return list(map(parse_day, soup.findAll('table', attrs={'class': 'rasp_tabl'})[1:]))
 
