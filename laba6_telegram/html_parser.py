@@ -12,40 +12,54 @@ class WeekDay:
         # return f'{self.title}\n' \
         #        + '\n'.join([str(lesson) for lesson in self.lessons])
         return f"<b>{self.title}</b>\n" + \
-                .join([str(lesson) for lesson in self.lessons])
+                '\n'.join([str(lesson) for lesson in self.lessons])
+
 
 @dataclass
 class Lesson:
-    period: tuple
+    period: str
     title: str
     teacher: str
-    classroom: str
+    place: str
+    room: str
+    week: str
 
     def __str__(self):
-        return f'   <b>{self.period[0]} : {self.period[1]}</b> В аудитории {self.classroom} \n {self.title} ({self.teacher})'
+        return f'🕜 <b>{self.period}</b> <b> {self.week} </b>\n' \
+               f'   {self.title} ({self.teacher}) \n' \
+               f'   {self.room}  {self.place} \n'
 
 
 def parse_lesson(soup: BeautifulSoup) -> Lesson:
-    lesson_name, teacher = soup\
-        .find('td', attrs={'class': 'lesson_td'})\
-        .findAll('div')
+    time = soup.find('td', attrs={'class': 'time'})
+    period = time.find('span').text
+    week = time.find('dt').text if time.find('dt') is not None else ''
 
-    period = soup.find('span').text
+    lesson = soup.find('td', attrs={'class': 'lesson'})
+    title, teacher = lesson.find('dd'), lesson.find('b')
+
+    classroom = soup.find('td', attrs={'class': 'room'})
+    place, room = classroom.find('span'), classroom.find('dd')
 
     return Lesson(
-        period=(period[:int(len(period) / 2)], period[int(len(period) / 2):]),
-        title=lesson_name.text,
-        teacher=teacher.text,
-        classroom=soup.find('div', attrs={'class': 'place'}).text
+        period=period,
+        week=week,
+        title=title.text,
+        teacher=teacher.text.strip(),
+        place=place.text,
+        room=room.text
     )
 
 
 def parse_weekday(soup: BeautifulSoup) -> WeekDay:
     return WeekDay(
-        title=soup.find('p').text,
+        title=soup.find('th', attrs={'class': 'day'}).text,
         lessons=list(map(
             parse_lesson,
-            soup.findAll('tr', attrs={'class': 'period-tr'})
+            filter(
+                lambda s: len(s.contents) > 0,
+                soup.findAll('tr')
+            )
         )),
     )
 
@@ -53,5 +67,5 @@ def parse_weekday(soup: BeautifulSoup) -> WeekDay:
 def parse(contents):
     soup = BeautifulSoup(contents, 'lxml')
 
-    return list(map(parse_weekday, soup.findAll('div', attrs={'class': 'weekday-div'})))
+    return list(map(parse_weekday, soup.findAll('table', attrs={'class': 'rasp_tabl'})[1:]))
 
